@@ -7,6 +7,15 @@
 
 import UIKit
 
+class SecondViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .gray
+        // Do any additional setup after loading the view.
+    }
+}
+
 class GenreButtonScreen: UIViewController {
 
     override func viewDidLoad() {
@@ -14,7 +23,9 @@ class GenreButtonScreen: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+    @IBAction func favBtn(){
+        present(SecondViewController(), animated: true)
+    }
 
     /*
     // MARK: - Navigation

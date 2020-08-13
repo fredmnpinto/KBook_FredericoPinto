@@ -301,57 +301,37 @@ struct SearchInfo: Decodable {
 
 
 
-var bookArray : [Response?] = []
+//var bookArray : [Response?] = []
 
 class GenreButtonScreen: UIViewController {
-    var current_book = 0
+    //var current_book = 0
     
     /*@IBAction func Btn_0(_ sender: Any) {
         let vc = BookDetail()
         self.present(vc, animated: true)
         setup()
     }*/
-    
-    
+    func scrollViewDidScroll (_ mainScrollView: UIScrollView){
+        let offSetY = mainScrollView.contentOffset.y
+        let contentHeight = mainScrollView.contentSize.height
+        print("offSetY = \(offSetY) | contentHeight = \(contentHeight)")
+    }
+    /*@IBOutlet weak var scrollView: UIScrollView!
+    scrollviewDidScroll(scrollView)
     override func viewDidLoad() {
         super.viewDidLoad()
+        */
         
-        let url = ["https://www.googleapis.com/books/v1/volumes/x6qjAwAAQBAJ",
-                   "https://www.googleapis.com/books/v1/volumes/4IG_CwAAQBAJ",
-                   "https://www.googleapis.com/books/v1/volumes/mmx3CgAAQBAJ",
-                   "https://www.googleapis.com/books/v1/volumes/bi6roOTgYK8C",
-                   "https://www.googleapis.com/books/v1/volumes/P3aE0pgSFfcC",
-                   "https://www.googleapis.com/books/v1/volumes/a09NMFdA6m0C",
-                   "https://www.googleapis.com/books/v1/volumes/_yU1XDHBAF8C",
-                   "https://www.googleapis.com/books/v1/volumes/C4EQySE9iL4C",
-                   "https://www.googleapis.com/books/v1/volumes/ymJIyHcVbfsC",
-                   "https://www.googleapis.com/books/v1/volumes/A6eZFLXGrUwC",
-                   "https://www.googleapis.com/books/v1/volumes/rj45JvYuOdIC",
-                   "https://www.googleapis.com/books/v1/volumes/Bd0pYCqRcssC",
-                   "https://www.googleapis.com/books/v1/volumes/0ses_ButxJUC",
-                   "https://www.googleapis.com/books/v1/volumes/mUsZBwAAQBAJ",
-                   "https://www.googleapis.com/books/v1/volumes/grPI8RnEqX0C",
-                   "https://www.googleapis.com/books/v1/volumes/wTaJjotNVMEC",
-                   "https://www.googleapis.com/books/v1/volumes/XzZ8y-Cz_BsC",
-                   "https://www.googleapis.com/books/v1/volumes/IWRh2HQFWucC",
-                   "https://www.googleapis.com/books/v1/volumes/cevlBQAAQBAJ",
-                   "https://www.googleapis.com/books/v1/volumes/Jea8AQAAQBAJ",]
-        
-        for link in url{
-            
-            get_data(from: link)
-            
-        }
         
         // Do any additional setup after loading the view.
     }
-    @IBAction func tapBtn0(_ sender: Any) {
-        let vc : BookDetail
-        currentBook = 0;
-        setup()
-    }
-    
-    private func get_data(from url: String){
+ //   @IBAction func tapBtn0(_ sender: Any) {
+ //       let vc : BookDetail
+ //       currentBook = 0;
+ //       setup()
+ //   }
+   
+   /* private func get_data(from url: String){
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
             guard let data = data, error == nil else{
                 print("something went wrong")
@@ -376,7 +356,7 @@ class GenreButtonScreen: UIViewController {
         task.resume()
         
         
-    }
+    }*/
     
     /*
     // MARK: - Navigation
@@ -387,6 +367,6 @@ class GenreButtonScreen: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
-
+    
+    
+//}

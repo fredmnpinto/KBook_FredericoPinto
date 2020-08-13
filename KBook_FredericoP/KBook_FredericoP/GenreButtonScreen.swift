@@ -11,7 +11,7 @@ import UIKit
 /*struct Response: Decodable{
     let books: Book
 }*/
-
+/*
 struct Response : Decodable {
     let kind: String
     let id: String
@@ -49,16 +49,16 @@ struct SaleInfo: Decodable{
 struct VolumeInfo: Decodable{
     let title: String
     let subtitle: String
-    let authors: Array<String>
+    let authors: [String]
     let publisher: String
     let publishedDate: String
     let description: String
-    let industryIdentifiers: Array<IndustryIdentifiers>
-    let readingModes: Array<ReadingModes>
+    let industryIdentifiers: [IndustryIdentifiers]
+    let readingModes: [ReadingModes]
     let pageCount: Int
     let printedPageCount: Int
     let printType: String
-    let categories: Array<String>
+    let categories: [String]
     let maturityRating: String
     let allowAnonLogging: Bool
     let contentVersion: String
@@ -88,7 +88,93 @@ struct IndustryIdentifiers: Decodable{
     let type: String
     let identifier: String
 }
+*/
+ // This file was generated from JSON Schema using quicktype, do not modify it directly.
+ // To parse the JSON, add this file to your project and do:
+ //
+ //   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
 
+ import Foundation
+
+ // MARK: - Welcome
+ struct Response: Codable {
+     let kind, id, etag: String
+     let selfLink: String
+     let volumeInfo: VolumeInfo
+     let saleInfo: SaleInfo
+     let accessInfo: AccessInfo
+ }
+
+ // MARK: - AccessInfo
+ struct AccessInfo: Codable {
+     let country, viewability: String
+     let embeddable, publicDomain: Bool
+     let textToSpeechPermission: String
+     let epub, pdf: Epub
+     let webReaderLink: String
+     let accessViewStatus: String
+     let quoteSharingAllowed: Bool
+ }
+
+ // MARK: - Epub
+ struct Epub: Codable {
+     let isAvailable: Bool
+ }
+
+ // MARK: - SaleInfo
+ struct SaleInfo: Codable {
+     let country, saleability: String
+     let isEbook: Bool
+ }
+
+ // MARK: - VolumeInfo
+ struct VolumeInfo: Codable {
+     let title, subtitle: String
+     let authors: [String]
+     let publisher, publishedDate, volumeInfoDescription: String
+     let industryIdentifiers: [IndustryIdentifier]
+     let readingModes: ReadingModes
+     let pageCount, printedPageCount: Int
+     let printType: String
+     let categories: [String]
+     let maturityRating: String
+     let allowAnonLogging: Bool
+     let contentVersion: String
+     let panelizationSummary: PanelizationSummary
+     let imageLinks: ImageLinks
+     let language: String
+     let previewLink: String
+     let infoLink, canonicalVolumeLink: String
+
+     enum CodingKeys: String, CodingKey {
+         case title, subtitle, authors, publisher, publishedDate
+         case volumeInfoDescription = "description"
+         case industryIdentifiers, readingModes, pageCount, printedPageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, imageLinks, language, previewLink, infoLink, canonicalVolumeLink
+     }
+ }
+
+ // MARK: - ImageLinks
+ struct ImageLinks: Codable {
+     let smallThumbnail, thumbnail, small, medium: String
+     let large, extraLarge: String
+ }
+
+ // MARK: - IndustryIdentifier
+ struct IndustryIdentifier: Codable {
+     let type, identifier: String
+ }
+
+ // MARK: - PanelizationSummary
+ struct PanelizationSummary: Codable {
+     let containsEpubBubbles, containsImageBubbles: Bool
+ }
+
+ // MARK: - ReadingModes
+ struct ReadingModes: Codable {
+     let text, image: Bool
+ }
+
+ 
 /*
  {
    "kind": "books#volumes",
@@ -173,19 +259,40 @@ struct IndustryIdentifiers: Decodable{
 
 
 
-
+var bookArray : [Response] = []
 
 class GenreButtonScreen: UIViewController {
     var current_book = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = "https://www.googleapis.com/books/v1/volumes/x6qjAwAAQBAJ"
+        let url = ["https://www.googleapis.com/books/v1/volumes/x6qjAwAAQBAJ",
+                   "https://www.googleapis.com/books/v1/volumes/4IG_CwAAQBAJ",
+                   "https://www.googleapis.com/books/v1/volumes/mmx3CgAAQBAJ",
+                   "https://www.googleapis.com/books/v1/volumes/bi6roOTgYK8C",
+                   "https://www.googleapis.com/books/v1/volumes/P3aE0pgSFfcC",
+                   "https://www.googleapis.com/books/v1/volumes/a09NMFdA6m0C",
+                   "https://www.googleapis.com/books/v1/volumes/_yU1XDHBAF8C",
+                   "https://www.googleapis.com/books/v1/volumes/C4EQySE9iL4C",
+                   "https://www.googleapis.com/books/v1/volumes/ymJIyHcVbfsC",
+                   "https://www.googleapis.com/books/v1/volumes/A6eZFLXGrUwC",
+                   "https://www.googleapis.com/books/v1/volumes/rj45JvYuOdIC",
+                   "https://www.googleapis.com/books/v1/volumes/Bd0pYCqRcssC",
+                   "https://www.googleapis.com/books/v1/volumes/0ses_ButxJUC",
+                   "https://www.googleapis.com/books/v1/volumes/mUsZBwAAQBAJ",
+                   "https://www.googleapis.com/books/v1/volumes/grPI8RnEqX0C",
+                   "https://www.googleapis.com/books/v1/volumes/wTaJjotNVMEC",
+                   "https://www.googleapis.com/books/v1/volumes/XzZ8y-Cz_BsC",
+                   "https://www.googleapis.com/books/v1/volumes/IWRh2HQFWucC",
+                   "https://www.googleapis.com/books/v1/volumes/cevlBQAAQBAJ",
+                   "https://www.googleapis.com/books/v1/volumes/Jea8AQAAQBAJ",]
         
-         get_data(from: url)
+//            get_data(from: link)
+//            print(bookArray[i].volumeInfo.title)
         // Do any additional setup after loading the view.
     }
    
+    // var books : [Response]
     
     private func get_data(from url: String){
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
@@ -204,8 +311,8 @@ class GenreButtonScreen: UIViewController {
             guard let json = book else {
                 return
             }
-            
             print(json.volumeInfo.title)
+//            bookArray.append(json)
         })
         task.resume()
         

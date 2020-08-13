@@ -6,57 +6,173 @@
 //
 
 import UIKit
+import Foundation
 
+// MARK: - Welcome
+struct Response: Decodable {
+    let kind, id, etag: String?
+    let selfLink: String?
+    let volumeInfo: VolumeInfo
+    let layerInfo: LayerInfo?
+    let saleInfo: SaleInfo?
+    let accessInfo: AccessInfo?
+    var favorite: Bool? = false
+    let textSnippet: SearchInfo?
+}
 
-/*struct Response: Decodable{
-    let books: Book
-}*/
+// MARK: - AccessInfo
+struct AccessInfo: Decodable {
+    let country, viewability: String?
+    let embeddable, publicDomain: Bool?
+    let textToSpeechPermission: String?
+    let epub, pdf: Epub?
+    let webReaderLink: String?
+    let accessViewStatus: String?
+    let quoteSharingAllowed: Bool?
+}
+
+// MARK: - Epub
+struct Epub: Decodable {
+    let isAvailable: Bool?
+    let acsTokenLink: String?
+}
+
+// MARK: - LayerInfo
+struct LayerInfo: Decodable {
+    let layers: [Layer]?
+}
+
+// MARK: - Layer
+struct Layer: Decodable {
+    let layerID, volumeAnnotationsVersion: String?
+
+    enum CodingKeys: String, CodingKey {
+        case layerID = "layerId"
+        case volumeAnnotationsVersion
+    }
+}
+
+// MARK: - SaleInfo
+struct SaleInfo: Decodable {
+    let country, saleability: String?
+    let isEbook: Bool?
+    let listPrice, retailPrice: SaleInfoListPrice?
+    let buyLink: String?
+    let offers: [Offer]?
+}
+
+// MARK: - SaleInfoListPrice
+struct SaleInfoListPrice: Decodable {
+    let amount: Double?
+    let currencyCode: String?
+}
+
+// MARK: - Offer
+struct Offer: Decodable {
+    let finskyOfferType: Int?
+    let listPrice, retailPrice: OfferListPrice?
+}
+
+// MARK: - OfferListPrice
+struct OfferListPrice: Decodable {
+    let amountInMicros: Int?
+    let currencyCode: String?
+}
+
+// MARK: - VolumeInfo
+struct VolumeInfo: Decodable {
+    let title, subtitle: String?
+    let authors: [String]
+    let publisher, publishedDate, volumeInfoDescription: String?
+    let industryIdentifiers: [IndustryIdentifier]?
+    let readingModes: ReadingModes?
+    let pageCount, printedPageCount: Int?
+    let printType: String?
+    let categories: [String]?
+    let averageRating, ratingsCount: Int?
+    let maturityRating: String?
+    let allowAnonLogging: Bool?
+    let contentVersion: String?
+    let panelizationSummary: PanelizationSummary?
+    let imageLinks: ImageLinks?
+    let language: String?
+    let previewLink: String?
+    let infoLink, canonicalVolumeLink: String?
+
+    enum CodingKeys: String, CodingKey {
+        case title, subtitle, authors, publisher, publishedDate
+        case volumeInfoDescription = "description"
+        case industryIdentifiers, readingModes, pageCount, printedPageCount, printType, categories, averageRating, ratingsCount, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, imageLinks, language, previewLink, infoLink, canonicalVolumeLink
+    }
+}
+
+// MARK: - ImageLinks
+struct ImageLinks: Decodable {
+    let smallThumbnail, thumbnail, small, medium: String?
+    let large, extraLarge: String?
+}
+
+// MARK: - IndustryIdentifier
+struct IndustryIdentifier: Decodable {
+    let type, identifier: String?
+}
+
+// MARK: - PanelizationSummary
+struct PanelizationSummary: Decodable {
+    let containsEpubBubbles, containsImageBubbles: Bool?
+}
+
+// MARK: - ReadingModes
+struct ReadingModes: Decodable {
+    let text, image: Bool?
+}
+
+// MARK: - SearchInfo
+struct SearchInfo: Decodable {
+   let textSnippet: String
+}
+
 /*
-struct Response : Decodable {
-    let kind: String
-    let id: String
-    let etag: String
+ // MARK: - Welcome
+struct Response: Decodable {
+    let kind, id, etag: String
     let selfLink: String
     let volumeInfo: VolumeInfo
     let saleInfo: SaleInfo
     let accessInfo: AccessInfo
+    let searchInfo: SearchInfo?
 }
 
-struct AccessInfo: Decodable{
-    let country, viewability, embeddable, textToSpeechPermission : String
-    let publicDomain: Bool
-    let epub: Epub
-    let pdf: Pdf
+ // MARK: - AccessInfo
+struct AccessInfo: Decodable {
+    let country, viewability: String
+    let embeddable, publicDomain: Bool
+    let textToSpeechPermission: String
+    let epub, pdf: Epub
     let webReaderLink: String
     let accessViewStatus: String
     let quoteSharingAllowed: Bool
-}
+ }
 
-struct Pdf: Decodable{
+ // MARK: - Epub
+struct Epub: Decodable {
     let isAvailable: Bool
+ }
+
+ // MARK: - SaleInfo
+struct SaleInfo: Decodable {
+    let country, saleability: String
+    let isEbook: Bool
 }
 
-struct Epub: Decodable{
-    let isAvailable: Bool
-}
-
-struct SaleInfo: Decodable{
-    let country: String
-    let saleability: String
-    let isEbook: String
-}
-
-struct VolumeInfo: Decodable{
-    let title: String
-    let subtitle: String
+ // MARK: - VolumeInfo
+struct VolumeInfo: Decodable {
+    let title, subtitle: String
     let authors: [String]
-    let publisher: String
-    let publishedDate: String
-    let description: String
-    let industryIdentifiers: [IndustryIdentifiers]
-    let readingModes: [ReadingModes]
-    let pageCount: Int
-    let printedPageCount: Int
+    let publisher, publishedDate, volumeInfoDescription: String
+    let industryIdentifiers: [IndustryIdentifier]
+    let readingModes: ReadingModes
+    let pageCount, printedPageCount: Int
     let printType: String
     let categories: [String]
     let maturityRating: String
@@ -64,117 +180,43 @@ struct VolumeInfo: Decodable{
     let contentVersion: String
     let panelizationSummary: PanelizationSummary
     let imageLinks: ImageLinks
-    let language :String
-    let previewLink : String
-    let infoLink: String
-    let canonicalVolumeLink: String
+    let language: String
+    let previewLink: String
+    let infoLink, canonicalVolumeLink: String
+
+    enum CodingKeys: String, CodingKey {
+        case title, subtitle, authors, publisher, publishedDate
+        case volumeInfoDescription = "description"
+        case industryIdentifiers, readingModes, pageCount, printedPageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, imageLinks, language, previewLink, infoLink, canonicalVolumeLink
+    }
 }
-
-struct ImageLinks: Decodable{
-    let smallThumbnail, thumbnail, small, medium, large, extraLarge: String
-}
-
-struct PanelizationSummary: Decodable{
-    let containsEpubBubbles: Bool
-    let containsImageBubbles: Bool
-}
-
-struct ReadingModes: Decodable{
-    let text: Bool
-    let image: Bool
-}
-
-struct IndustryIdentifiers: Decodable{
-    let type: String
-    let identifier: String
-}
-*/
- // This file was generated from JSON Schema using quicktype, do not modify it directly.
- // To parse the JSON, add this file to your project and do:
- //
- //   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
-
- import Foundation
-
- // MARK: - Welcome
- struct Response: Codable {
-     let kind, id, etag: String
-     let selfLink: String
-     let volumeInfo: VolumeInfo
-     let saleInfo: SaleInfo
-     let accessInfo: AccessInfo
- }
-
- // MARK: - AccessInfo
- struct AccessInfo: Codable {
-     let country, viewability: String
-     let embeddable, publicDomain: Bool
-     let textToSpeechPermission: String
-     let epub, pdf: Epub
-     let webReaderLink: String
-     let accessViewStatus: String
-     let quoteSharingAllowed: Bool
- }
-
- // MARK: - Epub
- struct Epub: Codable {
-     let isAvailable: Bool
- }
-
- // MARK: - SaleInfo
- struct SaleInfo: Codable {
-     let country, saleability: String
-     let isEbook: Bool
- }
-
- // MARK: - VolumeInfo
- struct VolumeInfo: Codable {
-     let title, subtitle: String
-     let authors: [String]
-     let publisher, publishedDate, volumeInfoDescription: String
-     let industryIdentifiers: [IndustryIdentifier]
-     let readingModes: ReadingModes
-     let pageCount, printedPageCount: Int
-     let printType: String
-     let categories: [String]
-     let maturityRating: String
-     let allowAnonLogging: Bool
-     let contentVersion: String
-     let panelizationSummary: PanelizationSummary
-     let imageLinks: ImageLinks
-     let language: String
-     let previewLink: String
-     let infoLink, canonicalVolumeLink: String
-
-     enum CodingKeys: String, CodingKey {
-         case title, subtitle, authors, publisher, publishedDate
-         case volumeInfoDescription = "description"
-         case industryIdentifiers, readingModes, pageCount, printedPageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, imageLinks, language, previewLink, infoLink, canonicalVolumeLink
-     }
- }
 
  // MARK: - ImageLinks
- struct ImageLinks: Codable {
-     let smallThumbnail, thumbnail, small, medium: String
-     let large, extraLarge: String
+struct ImageLinks: Decodable {
+    let smallThumbnail, thumbnail, small, medium: String
+    let large, extraLarge: String
  }
 
  // MARK: - IndustryIdentifier
- struct IndustryIdentifier: Codable {
-     let type, identifier: String
- }
+struct IndustryIdentifier: Decodable {
+    let type, identifier: String
+}
 
  // MARK: - PanelizationSummary
- struct PanelizationSummary: Codable {
+ struct PanelizationSummary: Decodable {
      let containsEpubBubbles, containsImageBubbles: Bool
  }
 
  // MARK: - ReadingModes
- struct ReadingModes: Codable {
+ struct ReadingModes: Decodable {
      let text, image: Bool
  }
 
- 
+ // MARK: - SearchInfo
+struct SearchInfo: Decodable {
+    let textSnippet: String
+}
+*/
 /*
  {
    "kind": "books#volumes",
@@ -259,10 +301,18 @@ struct IndustryIdentifiers: Decodable{
 
 
 
-var bookArray : [Response] = []
+var bookArray : [Response?] = []
 
 class GenreButtonScreen: UIViewController {
     var current_book = 0
+    
+    /*@IBAction func Btn_0(_ sender: Any) {
+        let vc = BookDetail()
+        self.present(vc, animated: true)
+        setup()
+    }*/
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -287,12 +337,19 @@ class GenreButtonScreen: UIViewController {
                    "https://www.googleapis.com/books/v1/volumes/cevlBQAAQBAJ",
                    "https://www.googleapis.com/books/v1/volumes/Jea8AQAAQBAJ",]
         
-//            get_data(from: link)
-//            print(bookArray[i].volumeInfo.title)
+        for link in url{
+            
+            get_data(from: link)
+            
+        }
+        
         // Do any additional setup after loading the view.
     }
-   
-    // var books : [Response]
+    @IBAction func tapBtn0(_ sender: Any) {
+        let vc : BookDetail
+        currentBook = 0;
+        setup()
+    }
     
     private func get_data(from url: String){
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
@@ -311,8 +368,10 @@ class GenreButtonScreen: UIViewController {
             guard let json = book else {
                 return
             }
-            print(json.volumeInfo.title)
-//            bookArray.append(json)
+            print(json.volumeInfo.title as Any)
+            print(json.volumeInfo.authors as Any)
+            print(json.volumeInfo.subtitle as Any)
+            bookArray.append(json)
         })
         task.resume()
         
@@ -330,3 +389,4 @@ class GenreButtonScreen: UIViewController {
     */
 
 }
+

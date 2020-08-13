@@ -14,6 +14,7 @@
 		112479B224DEC30A006720B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112479B024DEC30A006720B2 /* LaunchScreen.storyboard */; };
 		112479BA24DEC5F4006720B2 /* GenreButtonScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112479B924DEC5F4006720B2 /* GenreButtonScreen.swift */; };
 		112479BC24E41E10006720B2 /* BeautyMountains.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 112479BB24E41E10006720B2 /* BeautyMountains.ttf */; };
+		112479BE24E56560006720B2 /* BookDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112479BD24E5655F006720B2 /* BookDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		112479B324DEC30A006720B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		112479B924DEC5F4006720B2 /* GenreButtonScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreButtonScreen.swift; sourceTree = "<group>"; };
 		112479BB24E41E10006720B2 /* BeautyMountains.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = BeautyMountains.ttf; path = ../../../../../Downloads/BeautyMountains.ttf; sourceTree = "<group>"; };
+		112479BD24E5655F006720B2 /* BookDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				112479A524DEC307006720B2 /* AppDelegate.swift */,
 				112479A724DEC307006720B2 /* SceneDelegate.swift */,
 				112479B924DEC5F4006720B2 /* GenreButtonScreen.swift */,
+				112479BD24E5655F006720B2 /* BookDetail.swift */,
 				112479AB24DEC307006720B2 /* Main.storyboard */,
 				112479BB24E41E10006720B2 /* BeautyMountains.ttf */,
 				112479AE24DEC30A006720B2 /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				112479A624DEC307006720B2 /* AppDelegate.swift in Sources */,
+				112479BE24E56560006720B2 /* BookDetail.swift in Sources */,
 				112479A824DEC307006720B2 /* SceneDelegate.swift in Sources */,
 				112479BA24DEC5F4006720B2 /* GenreButtonScreen.swift in Sources */,
 			);

@@ -9,7 +9,8 @@ import UIKit
 
 
 class BookDetail: UIViewController {
-    static var bookArray : [Response?] = []
+    var bookNumber = 0
+    var bookLink = ""
     @IBAction func btnPress(_ sender: Any) {
         
     }
@@ -97,7 +98,7 @@ class BookDetail: UIViewController {
                  guard let json = book else {
                      return
                  }
-                print(BookDetail.bookArray.endIndex)
+                //print(BookDetail.bookArray.endIndex)
                  print(json.volumeInfo.title as Any)
                 //self.Title_lbl.text = json.volumeInfo.title
                  print(json.volumeInfo.authors as Any)
@@ -128,11 +129,13 @@ class BookDetail: UIViewController {
 
                     let image = UIImage(data: imageData)
                     BookDetail().Cover_img.image = image*/
-                    var imageName = ""
-                    
+                    let imageName = "cover_\(self.bookNumber)"
+                    self.Cover_img.image = UIImage(named: imageName)
+                    self.bookLink = book?.accessInfo?.webReaderLink ?? "https://www.googleapis.com/books/v1/volumes/x6qjAwAAQBAJ"
                     self.Author_lbl.text = authors
                     self.Title_lbl.text = book2?.title
                     self.Description_lbl.text = book2?.volumeInfoDescription
+                    self.Editor_lbl.text = book2?.publisher
                 }
                 
                 
@@ -142,15 +145,18 @@ class BookDetail: UIViewController {
              
          }
         
-        get_data(from: url[0])
-        
-        print("bookArray.count = \(BookDetail.bookArray.count)")
-        
+        get_data(from: url[self.bookNumber])
+        print(self.bookLink)
         //setup()
         
         // Do any additional setup after loading the view.
         
     }
+    
+    
+    
+    
+    /*
     func setup() {
        print("Well, what can i say..", BookDetail.bookArray[0]?.volumeInfo.title as Any)
        let book = BookDetail.bookArray[0]?.volumeInfo
@@ -176,7 +182,7 @@ class BookDetail: UIViewController {
        BookDetail().Description_lbl.text = book?.volumeInfoDescription
        // Author_lbl.text = bookArray[currentBook]?.volumeInfo.authors
    }
-    
+    */
     
      
     

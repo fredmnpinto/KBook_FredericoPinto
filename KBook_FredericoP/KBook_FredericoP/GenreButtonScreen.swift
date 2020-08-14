@@ -222,6 +222,12 @@ struct SearchInfo: Decodable {
 class GenreButtonScreen: UIViewController {
     //var current_book = 0
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue_1"{
+            let receiverVC = segue.destination as! BookDetail
+            receiverVC.bookNumber = 1
+        }
+    }
     /*@IBAction func Btn_0(_ sender: Any) {
         let vc = BookDetail()
         self.present(vc, animated: true)
@@ -232,11 +238,11 @@ class GenreButtonScreen: UIViewController {
         let contentHeight = mainScrollView.contentSize.height
         print("offSetY = \(offSetY) | contentHeight = \(contentHeight)")
     }
-    /*@IBOutlet weak var scrollView: UIScrollView!
-    scrollviewDidScroll(scrollView)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        */
+        
         
         
         // Do any additional setup after loading the view.
@@ -285,4 +291,4 @@ class GenreButtonScreen: UIViewController {
     */
     
     
-//}
+}

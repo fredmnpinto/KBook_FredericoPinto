@@ -202,6 +202,9 @@
                                                                 <state key="normal" backgroundImage="cover_1">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_1" id="jx8-zl-QQ0"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <viewLayoutGuide key="safeArea" id="R1l-bX-K6a"/>
@@ -447,8 +450,8 @@
                                     <constraint firstItem="mm7-2z-Cpm" firstAttribute="top" secondItem="Yry-47-CL9" secondAttribute="top" id="rXs-U5-sgs"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editado por:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xC7-Wo-2I2">
-                                <rect key="frame" x="30" y="541" width="93.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publicado por:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xC7-Wo-2I2">
+                                <rect key="frame" x="30" y="541" width="109" height="21"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -597,6 +600,9 @@
             <point key="canvasLocation" x="-1136" y="1196"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="jx8-zl-QQ0"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="checkmark.square" catalog="system" width="128" height="114"/>

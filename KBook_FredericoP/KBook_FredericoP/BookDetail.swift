@@ -11,8 +11,15 @@ import UIKit
 class BookDetail: UIViewController {
     var bookNumber = 0
     var bookLink = ""
+    var favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,] //Zero significa que o livro naquela posição não é um favorito, enquanto que Um significa que é
     @IBAction func btnPress(_ sender: Any) {
-        
+        favorites[bookNumber] *= -1
+        if favorites[bookNumber] == -1{
+            self.Fav_lbl.text = "Não é um favorito"
+        }
+        else if favorites[bookNumber] == 1{
+            self.Fav_lbl.text = "Favoritado"
+        }
     }
     
     @IBOutlet weak var Fav_lbl: UILabel!
@@ -34,6 +41,10 @@ class BookDetail: UIViewController {
         }
     }*/
     
+    @IBAction func webBtn(_ sender: Any) {
+        guard let webLink = URL(string: self.bookLink) else { return }
+        UIApplication.shared.open(webLink)
+    }
     
     /*
     // MARK: - Navigation
@@ -136,6 +147,12 @@ class BookDetail: UIViewController {
                     self.Title_lbl.text = book2?.title
                     self.Description_lbl.text = book2?.volumeInfoDescription
                     self.Editor_lbl.text = book2?.publisher
+                    if self.favorites[bookNumber] == -1{
+                        self.Fav_lbl.text = "Não é um favorito"
+                    }
+                    else if self.favorites[bookNumber] == 1{
+                        self.Fav_lbl.text = "Favoritado"
+                    }
                 }
                 
                 

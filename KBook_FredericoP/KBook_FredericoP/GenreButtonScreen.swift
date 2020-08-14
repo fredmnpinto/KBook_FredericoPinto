@@ -16,7 +16,6 @@ struct Response: Decodable {
     let layerInfo: LayerInfo?
     let saleInfo: SaleInfo?
     let accessInfo: AccessInfo?
-    var favorite: Bool? = false
     let textSnippet: SearchInfo?
 }
 
@@ -223,9 +222,16 @@ class GenreButtonScreen: UIViewController {
     //var current_book = 0
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segue_1"{
-            let receiverVC = segue.destination as! BookDetail
-            receiverVC.bookNumber = 1
+        let segID = segue.identifier
+        if ((segID?.contains("segue_")) != nil){
+            let seg_ = segID?.firstIndex(of: "_") ?? segID?.endIndex
+            let n = (segID?.index(after: seg_!))!
+            let segNumber = segID?[n...]
+            let segName = segID?[..<seg_!]
+            if segName == "segue"{
+                let receiverVC = segue.destination as! BookDetail
+                receiverVC.bookNumber = Int(segNumber!) ?? 0
+            }
         }
     }
     /*@IBAction func Btn_0(_ sender: Any) {

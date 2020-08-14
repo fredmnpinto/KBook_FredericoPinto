@@ -188,7 +188,7 @@
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <segue destination="60s-k9-R8Q" kind="show" id="NTc-ab-FSY"/>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_0" id="NTc-ab-FSY"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fo-4V-zWC">
@@ -224,6 +224,9 @@
                                                                 <state key="normal" backgroundImage="cover_2">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_2" id="iBa-Ey-QdH"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XrL-bN-ZB4">
                                                                 <rect key="frame" x="170" y="0.0" width="120" height="160"/>
@@ -236,6 +239,9 @@
                                                                 <state key="normal" backgroundImage="cover_3">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_3" id="kUN-sk-2YZ"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <viewLayoutGuide key="safeArea" id="GKl-hp-Dmi"/>
@@ -255,6 +261,9 @@
                                                                 <state key="normal" backgroundImage="cover_4">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_4" id="oGW-1q-SR8"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iig-Hp-FFe">
                                                                 <rect key="frame" x="170" y="0.0" width="120" height="160"/>
@@ -267,6 +276,9 @@
                                                                 <state key="normal" backgroundImage="cover_5">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_5" id="ai9-Qu-4l5"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <viewLayoutGuide key="safeArea" id="nbp-1V-iao"/>
@@ -285,6 +297,9 @@
                                                                 <state key="normal" backgroundImage="cover_6">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_6" id="FB4-87-9X2"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7p-pf-Rxd">
                                                                 <rect key="frame" x="170" y="0.0" width="120" height="160"/>
@@ -297,6 +312,9 @@
                                                                 <state key="normal" backgroundImage="cover_7">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_7" id="hO7-YX-pgN"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -315,6 +333,9 @@
                                                                 <state key="normal" backgroundImage="cover_8">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_8" id="8GT-CF-n9f"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lr1-0e-7ah">
                                                                 <rect key="frame" x="170" y="0.0" width="120" height="160"/>
@@ -327,6 +348,9 @@
                                                                 <state key="normal" backgroundImage="cover_9">
                                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <segue destination="60s-k9-R8Q" kind="show" identifier="segue_9" id="Gmq-HG-QVR"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <viewLayoutGuide key="safeArea" id="HwI-XR-hRd"/>
@@ -416,13 +440,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3z-gm-fO2">
-                                <rect key="frame" x="207" y="726" width="177" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3z-gm-fO2">
+                                <rect key="frame" x="267" y="725" width="118" height="48"/>
                                 <color key="backgroundColor" systemColor="tertiaryLabelColor"/>
-                                <fontDescription key="fontDescription" name="Georgia-BoldItalic" family="Georgia" pointSize="30"/>
-                                <state key="normal" title="Visitar Site">
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
+                                <state key="normal" title="Abrir no Safari">
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="webBtn:" destination="60s-k9-R8Q" eventType="touchUpInside" id="y6L-Hn-hNq"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Escrito por:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kpG-45-ZEg">
                                 <rect key="frame" x="30" y="586" width="92.5" height="22"/>

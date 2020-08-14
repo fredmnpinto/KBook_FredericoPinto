@@ -70,84 +70,113 @@ class BookDetail: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var currentBook: Int = 0
-        func setup() {
-           print("Well, what can i say..", BookDetail.bookArray[0]?.volumeInfo.title as Any)
-           let book = BookDetail.bookArray[0]?.volumeInfo
-           
-           var authors : String = ""
-           for i in (book?.authors.startIndex)!...((book?.authors.endIndex)! - 1) - 1{
-               if i == 0{
-                   authors = (book?.authors[i])!
-               }
-               else{
-               authors = authors + ", \(book?.authors[i] ?? "Couldn't read the authors name")"
-                   print(authors)
-               }
-               
-           }
-           
-           let imageUrlString = (book?.imageLinks?.thumbnail)!
-
-           let imageUrl = URL(string: imageUrlString)!
-
-           let imageData = try! Data(contentsOf: imageUrl)
-
-           let image = UIImage(data: imageData)
-           BookDetail().Cover_img.image = image
-            
-           BookDetail().Author_lbl.text = authors
-           BookDetail().Title_lbl.text = book?.title
-           BookDetail().Description_lbl.text = book?.volumeInfoDescription
-           // Author_lbl.text = bookArray[currentBook]?.volumeInfo.authors
-       }
+        //var currentBook: Int = 0
         
-        for link in url{
+        
+        /*for link in url{
             
             
-            get_data(from: link)
+            get_data(from: link) //PARA AMANHÃ: Não buscar toda a informação sempre e, sim, buscar apenas a informação necessária com base no index que o botao apertado retornará e o array de URLs
             
-        }
+        }*/
+        func get_data(from url: String){      // ERROR: Por algum motivo quando ele puxa os dados da api e                                            armazena no array de structs, os dados estão todos lá, mas                                           assim que sai da função, o array se torna novamente vazio
+            
+            let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { [self]data, response, error in
+                 guard let data = data, error == nil else{
+                     print("something went wrong")
+                     return
+                 }
+                 var book: Response?
+                 do {
+                     book = try JSONDecoder().decode(Response.self, from: data)
+                 }
+                 catch {
+                     print("failed to convert \(error.localizedDescription)")
+                 }
+                 
+                 guard let json = book else {
+                     return
+                 }
+                print(BookDetail.bookArray.endIndex)
+                 print(json.volumeInfo.title as Any)
+                //self.Title_lbl.text = json.volumeInfo.title
+                 print(json.volumeInfo.authors as Any)
+                 print(json.volumeInfo.subtitle as Any)
+                //BookDetail.bookArray.append(json)
+                /*
+                print(BookDetail.bookArray[BookDetail.bookArray.endIndex - 1]?.volumeInfo.title as Any)
+                print(BookDetail.bookArray[BookDetail.bookArray.endIndex - 1]?.volumeInfo.authors as Any)
+                print(BookDetail.bookArray[BookDetail.bookArray.endIndex - 1]?.volumeInfo.subtitle as Any)
+                print(BookDetail.bookArray.startIndex)*/
+                //setup()
+                
+                DispatchQueue.main.async{
+                    let book2 = book?.volumeInfo
+                    
+                    var authors : String = ""
+                    for author in book2!.authors{
+                         
+                         authors += "\(author);"
+                        
+                    }
+                    
+                    /*let imageUrlString = (book2?.imageLinks?.thumbnail)!
+
+                    let imageUrl = URL(string: imageUrlString)!
+
+                    let imageData = try! Data(contentsOf: imageUrl)
+
+                    let image = UIImage(data: imageData)
+                    BookDetail().Cover_img.image = image*/
+                    var imageName = ""
+                    
+                    self.Author_lbl.text = authors
+                    self.Title_lbl.text = book2?.title
+                    self.Description_lbl.text = book2?.volumeInfoDescription
+                }
+                
+                
+             })
+             task.resume()
+             
+             
+         }
+        
+        get_data(from: url[0])
         
         print("bookArray.count = \(BookDetail.bookArray.count)")
         
-        setup()
+        //setup()
         
         // Do any additional setup after loading the view.
+        
     }
-    private func get_data(from url: String){      // ERROR: Por algum motivo quando ele puxa os dados da api e armazena no array de structs, os dados                                                     estão todos lá, mas assim que sai da função, o array se torna novamente vazio
-         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-             guard let data = data, error == nil else{
-                 print("something went wrong")
-                 return
-             }
-             var book: Response?
-             do {
-                 book = try JSONDecoder().decode(Response.self, from: data)
-             }
-             catch {
-                 print("failed to convert \(error.localizedDescription)")
-             }
-             
-             guard let json = book else {
-                 return
-             }
-            print(BookDetail.bookArray.endIndex)
-             print(json.volumeInfo.title as Any)
-             print(json.volumeInfo.authors as Any)
-             print(json.volumeInfo.subtitle as Any)
-            BookDetail.bookArray.append(json)
+    func setup() {
+       print("Well, what can i say..", BookDetail.bookArray[0]?.volumeInfo.title as Any)
+       let book = BookDetail.bookArray[0]?.volumeInfo
+       
+       var authors : String = ""
+        for author in book!.authors{
             
-            print(BookDetail.bookArray[BookDetail.bookArray.endIndex - 1]?.volumeInfo.title as Any)
-            print(BookDetail.bookArray[BookDetail.bookArray.endIndex - 1]?.volumeInfo.authors as Any)
-            print(BookDetail.bookArray[BookDetail.bookArray.endIndex - 1]?.volumeInfo.subtitle as Any)
-            
-            
-         })
-         task.resume()
-         
-         
-     }
+            authors += "\(author);"
+           
+       }
+       
+       let imageUrlString = (book?.imageLinks?.thumbnail)!
+
+       let imageUrl = URL(string: imageUrlString)!
+
+       let imageData = try! Data(contentsOf: imageUrl)
+
+       let image = UIImage(data: imageData)
+       BookDetail().Cover_img.image = image
+        
+       BookDetail().Author_lbl.text = authors
+       BookDetail().Title_lbl.text = book?.title
+       BookDetail().Description_lbl.text = book?.volumeInfoDescription
+       // Author_lbl.text = bookArray[currentBook]?.volumeInfo.authors
+   }
+    
     
      
     
